@@ -137,8 +137,9 @@ public class JFVisiteEdit extends JFrame implements ActionListener, WindowListen
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
 		if(source == JBEdit) {
+			String conferenceTemp = (JTConference.getText().replaceAll(" ", "").length() == 0) ? "non" : JTConference.getText();
 			visite.setCommentaire(JTCommentaire.getText());
-			visite.setConference(JTConference.getText());
+			visite.setConference(conferenceTemp);
 			visite.setCodeConference(JTCodeConference.getText());
 			VisiteDao.modifier(visite);
 			this.dispose();
