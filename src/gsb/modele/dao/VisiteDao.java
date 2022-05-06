@@ -16,7 +16,7 @@ public class VisiteDao {
         ResultSet reqSelection = ConnexionMySql.execReqSelection("select * from VISITE where REFERENCE='"+codeVisite+"'");
         try {
             if (reqSelection.next()) {
-                uneVisite = new Visite(reqSelection.getString(1), reqSelection.getString(2), reqSelection.getString(3), MedecinDao.rechercher(reqSelection.getString(5)), VisiteurDao.rechercher(reqSelection.getString(4)));
+                uneVisite = new Visite(reqSelection.getString(1), reqSelection.getString(2), reqSelection.getString(3), MedecinDao.rechercher(reqSelection.getString(5)), VisiteurDao.rechercher(reqSelection.getString(4)), reqSelection.getString(6), reqSelection.getString(7));
             }
         }
         catch (Exception e) {
@@ -32,7 +32,7 @@ public class VisiteDao {
         ResultSet reqSelection = ConnexionMySql.execReqSelection("select * from VISITE where MATRICULE='"+matricule+"' AND DATEVISITE='"+date+"'");
         try {
             while(reqSelection.next()) {
-            	Visite uneVisite = new Visite(reqSelection.getString(1), reqSelection.getString(2), reqSelection.getString(3), MedecinDao.rechercher(reqSelection.getString(5)), VisiteurDao.rechercher(reqSelection.getString(4)));
+            	Visite uneVisite = new Visite(reqSelection.getString(1), reqSelection.getString(2), reqSelection.getString(3), MedecinDao.rechercher(reqSelection.getString(5)), VisiteurDao.rechercher(reqSelection.getString(4)), reqSelection.getString(6), reqSelection.getString(7));
                 
             	listeVisites.add(uneVisite);
             }
@@ -53,7 +53,9 @@ public class VisiteDao {
         String commentaire = uneVisite.getCommentaire();
         Medecin unMedecin = uneVisite.getUnMedecin();
         Visiteur unVisiteur = uneVisite.getUnVisiteur();
-        requeteInsertion = "insert into VISITE values('"+reference+"','"+date+"','"+commentaire+"','"+unVisiteur.getMatricule()+"','"+unMedecin.getCodeMed()+"')";
+        String conference = uneVisite.getConference();
+        String codeConference = uneVisite.getCodeConference();
+        requeteInsertion = "insert into VISITE values('"+reference+"','"+date+"','"+commentaire+"','"+unVisiteur.getMatricule()+"','"+unMedecin.getCodeMed()+"','"+conference+"','"+codeConference+"')";
         try{
             result = ConnexionMySql.execReqMaj(requeteInsertion);
         }
@@ -74,4 +76,10 @@ public class VisiteDao {
 		ConnexionMySql.fermerConnexionBd();
 		return result;
 	}
+    
+    public static int supprimer(String reference) {
+    	String requeteSupp = "DELETE FROM VISITE WHERE REFERENCE='"+reference+"'";
+    	int result = ConnexionMySql.execReqMaj(requeteSupp);
+    	return result;
+    }
 }

@@ -6,13 +6,17 @@ public class Visite {
     protected String commentaire;
     protected Medecin unMedecin;
     protected Visiteur unVisiteur;
+    protected String conference;
+    protected String codeConference;
 
-    public Visite(String reference, String date, String commentaire, Medecin unMedecin, Visiteur unVisiteur) {
+    public Visite(String reference, String date, String commentaire, Medecin unMedecin, Visiteur unVisiteur, String conference, String codeConference) {
         this.reference = reference;
         this.date = date;
         this.commentaire = commentaire;
         this.unMedecin = unMedecin;
         this.unVisiteur = unVisiteur;
+        this.conference = conference;
+        this.codeConference = codeConference;
     }
 
     public String getReference() {
@@ -53,6 +57,22 @@ public class Visite {
 
     public void setUnVisiteur(Visiteur unVisiteur) {
         this.unVisiteur = unVisiteur;
+    }
+    
+    public String getConference() {
+    	return conference;
+    }
+    
+    public void setConference(String conference) {
+    	this.conference = conference;
+    }
+    
+    public String getCodeConference() {
+    	return codeConference;
+    }
+    
+    public void setCodeConference(String codeConference) {
+    	this.codeConference = codeConference;
     }
 
 }

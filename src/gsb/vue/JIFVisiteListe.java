@@ -85,9 +85,9 @@ public class JIFVisiteListe extends JInternalFrame implements ActionListener{
 		p.add(JBRechercher);
 		
 		//Liste
-		String[] columnNames = {"Référence", "Code médecin", "Lieu"};
+		String[] columnNames = {"Référence", "Code médecin", "Lieu", "Conférence"};
 		
-		String[][] data = new String[0][3];
+		String[][] data = new String[0][4];
 		
 		table = new JTable(data, columnNames);
 		
@@ -134,15 +134,16 @@ public class JIFVisiteListe extends JInternalFrame implements ActionListener{
 				
 				if(VisiteurDao.rechercher(matricule) != null) {
 					ArrayList<Visite> listeVisites = VisiteDao.listeVisites(matricule, date);
-					String[] columnNames = {"Référence", "Code médecin", "Lieu"};
+					String[] columnNames = {"Référence", "Code médecin", "Lieu", "Conférence"};
 					
 					int i = 0;
-					Object[][] data = new Object[listeVisites.size()][3];
+					Object[][] data = new Object[listeVisites.size()][4];
 					
 					for(Visite visite : listeVisites) {
 						data[i][0] = visite.getReference();
 						data[i][1] = visite.getUnMedecin().getCodeMed();
 						data[i][2] = visite.getUnMedecin().getLaLocalite().getCodePostal() + " " + visite.getUnMedecin().getLaLocalite().getVille();
+						data[i][3] = visite.getConference();
 						i++;
 					}
 					

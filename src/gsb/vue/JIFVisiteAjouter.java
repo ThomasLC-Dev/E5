@@ -34,10 +34,14 @@ public class JIFVisiteAjouter extends JInternalFrame implements ActionListener{
 	protected JLabel JLCommentaire;
 	protected JLabel JLVisiteur;
 	protected JLabel JLMedecin;
+	protected JLabel JLConference;
+	protected JLabel JLCodeConference;
 	
 	protected JTextField JTReference;
 	protected JFormattedTextField JTDate;
 	protected JTextField JTCommentaire;
+	protected JTextField JTConference;
+	protected JTextField JTCodeConference;
 	
 	protected JComboBox<String> JCBVisiteur;
 	protected JComboBox<String> JCBMedecin;
@@ -47,13 +51,15 @@ public class JIFVisiteAjouter extends JInternalFrame implements ActionListener{
 	public JIFVisiteAjouter() {
 		
 		p = new JPanel();
-		pTexte = new JPanel(new GridLayout(5,2));
+		pTexte = new JPanel(new GridLayout(7,2));
 		
 		JLReference = new JLabel("Référence");
 		JLDate = new JLabel("Date visite");
 		JLCommentaire = new JLabel("Commentaire");
 		JLVisiteur = new JLabel("Matricule visiteur");
 		JLMedecin = new JLabel("Code médecin");
+		JLConference = new JLabel("Conférence (oui ou non)");
+		JLCodeConference = new JLabel("Code conférence");
 		
 		JTReference = new JTextField(20);
 		
@@ -69,6 +75,8 @@ public class JIFVisiteAjouter extends JInternalFrame implements ActionListener{
 		JTCommentaire = new JTextField();
 		JCBVisiteur = new JComboBox<String>();
 		JCBMedecin = new JComboBox<String>();
+		JTConference = new JTextField();
+		JTCodeConference = new JTextField();
 		
 		for(Visiteur visiteur : VisiteurDao.retournerCollectionDesVisiteurs()) {
 			JCBVisiteur.addItem(visiteur.getMatricule());
@@ -88,6 +96,10 @@ public class JIFVisiteAjouter extends JInternalFrame implements ActionListener{
 		pTexte.add(JCBVisiteur);
 		pTexte.add(JLMedecin);
 		pTexte.add(JCBMedecin);
+		pTexte.add(JLConference);
+		pTexte.add(JTConference);
+		pTexte.add(JLCodeConference);
+		pTexte.add(JTCodeConference);
 		
 		JBAjouter = new JButton("Ajouter");
 		JBAjouter.addActionListener(this);
@@ -111,11 +123,13 @@ public class JIFVisiteAjouter extends JInternalFrame implements ActionListener{
 				String commentaire = JTCommentaire.getText();
 				String medecin = JCBMedecin.getSelectedItem().toString();
 				String visiteur = JCBVisiteur.getSelectedItem().toString();
+				String conference = (JTConference.getText().replaceAll(" ", "").length() == 0) ? "non" : JTConference.getText();
+				String codeConference = (JTCodeConference.getText().replaceAll(" ", ""));
 				
 				if(VisiteDao.rechercher(reference) == null) {
 					if(MedecinDao.rechercher(medecin) != null) {
 						if(VisiteurDao.rechercher(visiteur) != null) {
-							Visite uneVisite = new Visite(reference, date, commentaire, MedecinDao.rechercher(medecin), VisiteurDao.rechercher(visiteur));
+							Visite uneVisite = new Visite(reference, date, commentaire, MedecinDao.rechercher(medecin), VisiteurDao.rechercher(visiteur), conference, codeConference);
 							VisiteDao.creer(uneVisite);
 						}
 						else {
