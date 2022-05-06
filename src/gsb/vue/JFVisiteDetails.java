@@ -30,12 +30,16 @@ public class JFVisiteDetails extends JFrame{
 	protected JLabel JLMatricule;
 	protected JLabel JLCode;
 	protected JLabel JLCommentaire;
+	protected JLabel JLConference;
+	protected JLabel JLCodeConference;
 	
 	protected JTextField JTReference;
 	protected JTextField JTDate;
 	protected JTextField JTMatricule;
 	protected JTextField JTCode;
 	protected JTextField JTCommentaire;
+	protected JTextField JTConference;
+	protected JTextField JTCodeConference;
 	
 	protected JTable table;
 	
@@ -46,13 +50,15 @@ public class JFVisiteDetails extends JFrame{
 		this.setSize(500, 300);
 		
 		p = new JPanel();
-		pDetails = new JPanel(new GridLayout(5,2));
+		pDetails = new JPanel(new GridLayout(7,2));
 		
 		JLReference = new JLabel("Référence");
 		JLDate = new JLabel("Date");
 		JLMatricule = new JLabel("Matricule visiteur");
 		JLCode = new JLabel("Code médecin");
 		JLCommentaire = new JLabel("Commentaire");
+		JLConference = new JLabel("Conférence");
+		JLCodeConference = new JLabel("Code conférence");
 		
 		JTReference = new JTextField(visite.getReference(),20);
 		JTReference.setEditable(false);
@@ -64,6 +70,10 @@ public class JFVisiteDetails extends JFrame{
 		JTCode.setEditable(false);
 		JTCommentaire = new JTextField(visite.getCommentaire());
 		JTCommentaire.setEditable(false);
+		JTConference = new JTextField(visite.getConference());
+		JTConference.setEditable(false);
+		JTCodeConference = new JTextField(visite.getCodeConference());
+		JTCodeConference.setEditable(false);
 		
 		pDetails.add(JLReference);
 		pDetails.add(JTReference);
@@ -75,6 +85,10 @@ public class JFVisiteDetails extends JFrame{
 		pDetails.add(JTCode);
 		pDetails.add(JLCommentaire);
 		pDetails.add(JTCommentaire);
+		pDetails.add(JLConference);
+		pDetails.add(JTConference);
+		pDetails.add(JLCodeConference);
+		pDetails.add(JTCodeConference);
 		
 		p.add(pDetails);
 		

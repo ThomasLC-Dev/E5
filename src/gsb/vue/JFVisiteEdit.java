@@ -37,12 +37,16 @@ public class JFVisiteEdit extends JFrame implements ActionListener, WindowListen
 	protected JLabel JLMatricule;
 	protected JLabel JLCode;
 	protected JLabel JLCommentaire;
+	protected JLabel JLConference;
+	protected JLabel JLCodeConference;
 	
 	protected JTextField JTReference;
 	protected JTextField JTDate;
 	protected JTextField JTMatricule;
 	protected JTextField JTCode;
 	protected JTextField JTCommentaire;
+	protected JTextField JTConference;
+	protected JTextField JTCodeConference;
 	
 	protected JTable table;
 	
@@ -58,13 +62,15 @@ public class JFVisiteEdit extends JFrame implements ActionListener, WindowListen
 		this.setSize(500, 300);
 		
 		p = new JPanel();
-		pDetails = new JPanel(new GridLayout(5,2));
+		pDetails = new JPanel(new GridLayout(7,2));
 		
 		JLReference = new JLabel("Référence");
 		JLDate = new JLabel("Date");
 		JLMatricule = new JLabel("Matricule visiteur");
 		JLCode = new JLabel("Code médecin");
 		JLCommentaire = new JLabel("Commentaire");
+		JLConference = new JLabel("Conférence");
+		JLCodeConference = new JLabel("Code conférence");
 		
 		JTReference = new JTextField(visite.getReference(),20);
 		JTReference.setEditable(false);
@@ -75,6 +81,8 @@ public class JFVisiteEdit extends JFrame implements ActionListener, WindowListen
 		JTCode = new JTextField(visite.getUnMedecin().getCodeMed());
 		JTCode.setEditable(false);
 		JTCommentaire = new JTextField(visite.getCommentaire());
+		JTConference = new JTextField(visite.getConference());
+		JTCodeConference = new JTextField(visite.getCodeConference());
 		
 		pDetails.add(JLReference);
 		pDetails.add(JTReference);
@@ -86,6 +94,10 @@ public class JFVisiteEdit extends JFrame implements ActionListener, WindowListen
 		pDetails.add(JTCode);
 		pDetails.add(JLCommentaire);
 		pDetails.add(JTCommentaire);
+		pDetails.add(JLConference);
+		pDetails.add(JTConference);
+		pDetails.add(JLCodeConference);
+		pDetails.add(JTCodeConference);
 		
 		p.add(pDetails);
 		
@@ -126,6 +138,8 @@ public class JFVisiteEdit extends JFrame implements ActionListener, WindowListen
 		Object source = e.getSource();
 		if(source == JBEdit) {
 			visite.setCommentaire(JTCommentaire.getText());
+			visite.setConference(JTConference.getText());
+			visite.setCodeConference(JTCodeConference.getText());
 			VisiteDao.modifier(visite);
 			this.dispose();
 		}

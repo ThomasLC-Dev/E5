@@ -70,8 +70,10 @@ public class VisiteDao {
 		String requeteModification;
 		String reference = uneVisite.getReference();
 		String commentaire = uneVisite.getCommentaire();
+		String conference = uneVisite.getConference();
+		String codeConference = uneVisite.getCodeConference();
 		
-		requeteModification = "UPDATE VISITE SET COMMENTAIRE='"+commentaire+"' WHERE REFERENCE='"+reference+"'";
+		requeteModification = "UPDATE VISITE SET COMMENTAIRE='"+commentaire+"',CONFERENCE='"+conference+"',CODECONFERENCE='"+codeConference+"' WHERE REFERENCE='"+reference+"'";
 		int result = ConnexionMySql.execReqMaj(requeteModification);
 		ConnexionMySql.fermerConnexionBd();
 		return result;
